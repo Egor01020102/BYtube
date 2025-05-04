@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - BYtube</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Навигационная панель -->
+    <header class="bg-red-600 px-4 py-3">
+        <div class="flex items-center justify-between max-w-full">
+            <!-- Логотип -->
+            <div class="flex-shrink-0">
+                <a href="/" class="text-white text-2xl font-bold">BYtube</a>
+            </div>
+
+            <!-- Поисковая строка по центру и на всю ширину -->
+            <div class="flex-grow max-w-4xl mx-auto w-full">
+                <form id="searchForm" class="flex">
+                    <input
+                        id="searchInput"
+                        type="text"
+                        name="q"
+                        placeholder="Поиск видео..."
+                        value="{{ query|default:'' }}"
+                        class="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none"
+                    >
+                    <button
+                        type="submit"
+                        class="bg-white text-red-600 px-4 py-2 rounded-r-full hover:bg-gray-200"
+                    >
+                        🔍
+                    </button>
+                </form>
+            </div>
+
+            <!-- Кнопка регистрации -->
+            <div>
+                <a href="{% url 'signup' %}" class="bg-white text-red-600 px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition duration-300">
+                    Регистрация
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+            <!-- Пустой блок для выравнивания по центру -->
+            <div class="w-12"></div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="p-6">
+        <div class="video-container">
+            {% for video in videos %}
+                <div class="video-card">
+                    <img src="{{ video.thumbnail.url }}" alt="Thumbnail">
+                    <div class="video-info">
+                        <h3>
+                            <a href="{% url 'video_detail' video.id %}">
+                                {{ video.title }}
+                            </a>
+                        </h3>
+                        <p>{{ video.description|truncatewords:20 }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Стили -->
+
+    <style>
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .video-card {
+            width: 300px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .video-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .video-info {
+            padding: 10px;
+        }
+        .video-info h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .video-info p {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+
+    <!-- JS для редиректа -->
+    <script>
+        const form = document.getElementById('searchForm');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const query = document.getElementById('searchInput').value;
+            if (query.trim()) {
+                window.location.href = /?q=${encodeURIComponent(query)};
+            }
+        });
+    </script>
+
+        <!-- Кнопка загрузки видео -->
+    <div class="fixed bottom-6 right-6">
+        <a href="{% url 'upload_video' %}"
+           class="bg-red-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-red-700 transition duration-300">
+            ⬆️ Загрузить видео
+        </a>
+    </div>
+
+</body>
+</html>

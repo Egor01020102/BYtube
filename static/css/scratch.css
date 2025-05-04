@@ -1,0 +1,55 @@
+/* Основные цвета */
+:root {
+    --background-color-light: #f8f8f8;
+    --background-color-dark: #121212;
+    --text-color-light: #333;
+    --text-color-dark: #eaeaea;
+    --link-color-light: #e60000;
+    --link-color-dark: #ff4d4d;
+    --card-background-light: #f1f1f1;
+    --card-background-dark: #333;
+    --button-background-light: #e60000;
+    --button-background-dark: #cc0000;
+}
+
+/* Общие стили */
+body {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Стили для тёмной темы */
+body.dark-theme {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+a {
+    color: var(--link-color-light);
+    text-decoration: none;
+}
+
+/* Стили для кнопок */
+button {
+    background-color: var(--button-background-light);
+    color: white;
+}
+
+button:hover {
+    background-color: var(--button-background-dark);
+}
+
+/* Стили для карточек */
+.video-card {
+    background-color: var(--card-background-light);
+}
+
+body.dark-theme .video-card {
+    background-color: var(--card-background-dark);
+}
+
+/* Другие стили... */

@@ -1,0 +1,107 @@
+<!-- templates/videos/upload_video.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка видео - BYtube</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .form-group input {
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #e60000;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #e60000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cc0000;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #e60000;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <h2>Загрузка видео</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}  <!-- Форма для загрузки видео -->
+            </div>
+            <button type="submit">Загрузить</button>
+        </form>
+        <a href="/" class="back-link">← Назад на главную</a>
+    </div>
+</body>
+</html>
